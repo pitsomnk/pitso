@@ -32,6 +32,34 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Global typography: use Playfair for headings and Geist for body text to keep pages consistent */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-playfair), var(--font-geist-sans), Georgia, serif;
+  color: var(--foreground);
+  margin-top: 0.85rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.08;
+}
+
+p, li, a, span, strong, em {
+  font-family: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+  color: var(--foreground);
+}
+
+/* Prose/content area tweaks to ensure consistent font usage in article pages */
+.prose, .prose p, .prose li {
+  font-family: var(--font-geist-sans);
+  color: var(--foreground);
+}
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--font-playfair);
+  color: var(--foreground);
+}
+
+/* Links use accent by default but allow Tailwind classes to override when needed */
+a { color: var(--accent); }
+a:hover { color: var(--accent-2); }
+
 /* Skip link for keyboard users */
 .skip-link {
   position: absolute;
