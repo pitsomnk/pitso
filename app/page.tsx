@@ -6,6 +6,8 @@ import Link from 'next/link';
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [showModal, setShowModal] = useState(false);
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,20 +32,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+      {/* Skip link for keyboard users */}
+      <a href="#maincontent" className="skip-link">Skip to main content</a>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg shadow-lg' 
           : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-md'
       } border-b border-slate-200 dark:border-slate-800`}>
-        <nav className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-slate-900 dark:text-white hover:scale-105 transition-transform cursor-pointer">
-            Pitso Manyike
+        <nav role="navigation" aria-label="Primary" className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-xl font-bold text-slate-900 dark:text-white hover:scale-105 transition-transform cursor-pointer flex items-center gap-3">
+            <a href="#home" aria-label="Home" className="hover:underline">Pitso Manyike</a>
+            <span className="hidden md:inline text-sm text-slate-600 dark:text-slate-400">— Writer • Crypto, Finance & Business</span>
           </h1>
           <div className="flex gap-6">
             {['about', 'expertise', 'articles', 'contact'].map((item) => (
               <a 
                 key={item}
                 href={`#${item}`} 
+                aria-current={activeSection === item ? 'page' : undefined}
                 className={`text-sm font-medium transition-all duration-300 relative ${
                   activeSection === item 
                     ? 'text-blue-600 dark:text-blue-400' 
@@ -52,7 +58,7 @@ export default function Home() {
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
                 {activeSection === item && (
-                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400"></span>
+                  <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-blue-600 dark:bg-blue-400" aria-hidden="true"></span>
                 )}
               </a>
             ))}
@@ -60,11 +66,16 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="max-w-6xl mx-auto px-6 py-24">
+      <main id="maincontent" className="max-w-6xl mx-auto px-6 py-24">
         <section id="home" className="min-h-screen flex items-center justify-center pt-20">
           <div className="text-center max-w-4xl animate-fade-in">
             <div className="mb-8 inline-block animate-bounce-slow">
-              <div className="w-32 h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <div
+                role="img"
+                aria-label="Logo: Pitso Manyike"
+                title="Pitso Manyike"
+                className="w-32 h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer"
+              >
                 PM
               </div>
             </div>
@@ -79,9 +90,9 @@ export default function Home() {
               Transforming complex topics into engaging, accessible content.
             </p>
             <div className="flex gap-4 justify-center flex-wrap animate-slide-up animation-delay-600">
-              <a href="#contact" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-lg hover:shadow-2xl hover:scale-105 hover:-translate-y-1 duration-300">
+              <button onClick={() => setShowModal(true)} className="px-8 py-4 btn-accent rounded-full font-semibold transition-all shadow-lg hover:shadow-2xl hover:scale-105 hover:-translate-y-1 duration-300">
                 Get in Touch
-              </a>
+              </button>
               <a href="#expertise" className="px-8 py-4 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border-2 border-slate-300 dark:border-slate-700 rounded-full font-semibold transition-all hover:border-blue-500 hover:scale-105 duration-300">
                 View My Work
               </a>
@@ -90,34 +101,40 @@ export default function Home() {
         </section>
 
         <section id="about" className="py-24">
-          <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto">
             <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">
               About Me
             </h3>
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 md:p-12 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <p className="text-lg text-slate-600 dark:text-slate-300 mb-6 leading-relaxed">
-                I&apos;m a passionate freelance writer who loves diving deep into topics that fascinate me—from 
-                the revolutionary world of cryptocurrency to the intricacies of finance and the dynamics of business. 
-                Writing isn&apos;t just my profession; it&apos;s how I explore, learn, and share knowledge about the subjects I care about most.
-              </p>
-              <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                Drawing from my experience in running a small business, I understand the real-world challenges that 
-                entrepreneurs and companies face. This hands-on perspective allows me to create content that goes beyond 
-                theory—I craft narratives that provide practical value, actionable insights, and genuine understanding. 
-                Whether it&apos;s exploring DeFi protocols, analyzing market trends, or sharing business strategies, my goal 
-                is to help others navigate complex topics with clarity and confidence.
-              </p>
-              
-              {/* Skills */}
-              <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700">
-                <h4 className="text-xl font-semibold text-slate-900 dark:text-white mb-4">Core Skills</h4>
-                <div className="flex flex-wrap gap-3">
-                  {['Content Writing', 'SEO Optimization', 'Research', 'Copywriting', 'Technical Writing', 'Editing'].map((skill) => (
-                    <span key={skill} className="px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium hover:scale-105 transition-transform cursor-default">
-                      {skill}
-                    </span>
-                  ))}
+            {/* About card styled similarly to expertise cards */}
+            <div className="expert-card card-entrance p-8 md:p-12">
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#06b6d4,#7c3aed)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.95)" strokeWidth="1.2"/>
+                    <path d="M8 15s1-2 4-2 4 2 4 2" stroke="rgba(255,255,255,0.95)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9 9h.01M15 9h.01" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
                 </div>
+                <div>
+                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-playfair), serif' }}>Pitso Manyike</div>
+                  <div className="expert-sub">Freelance Writer — Crypto, Finance & Business</div>
+                </div>
+              </div>
+
+              <div className="mt-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p>I write clear, practical, and engaging content about cryptocurrency, finance, and business. I focus on turning complex ideas into readable stories that deliver value to founders, investors, and curious readers.</p>
+                <p className="mt-4">With hands-on experience running a small business, I blend theory with practice to create content that helps people act — whether that&apos;s understanding DeFi risks, building investor-ready narratives, or explaining market trends.</p>
+              </div>
+
+              <div className="skill-chips mt-6">
+                {['Content Writing','SEO','Research','Copywriting','Technical Writing','Editing'].map(s => (
+                  <span key={s} className="skill-chip">{s}</span>
+                ))}
+              </div>
+
+              <div className="mt-6 flex gap-4">
+                <button onClick={() => setShowModal(true)} className="px-5 py-3 btn-accent rounded-lg font-semibold">Work with me</button>
+                <a href="#contact" className="px-5 py-3 border rounded-lg">Contact</a>
               </div>
             </div>
           </div>
@@ -127,75 +144,93 @@ export default function Home() {
           <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
             Areas of Expertise
           </h3>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-yellow-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                <span className="text-3xl">₿</span>
+          <div className="expert-grid max-w-6xl mx-auto">
+            {/* Cryptocurrency */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#fb923c,#f97316)' }} aria-hidden>
+                  {/* bitcoin-like icon */}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2v20" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M15 6.5c1.2.6 1.9 1.8 1.6 3.4-.3 1.8-1.9 3-3.8 3.6" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9 11c-1.2-.6-1.9-1.8-1.6-3.4C8 6 9.6 4.8 11.5 4.2" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Cryptocurrency</div>
+                  <div className="expert-sub">Blockchain, DeFi & NFTs</div>
+                </div>
               </div>
-              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                Cryptocurrency
-              </h4>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                In-depth analysis of blockchain technology, digital assets, DeFi, NFTs, and the evolving 
-                crypto ecosystem.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Blockchain Analysis
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> DeFi Protocols
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> NFT Market Trends
-                </li>
-              </ul>
+              <div className="expert-details">
+                <p>In-depth analysis of blockchain technology, digital assets, DeFi protocols, and NFT market signals. I explain technical concepts simply and provide tradeoffs for builders and investors.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">Blockchain Analysis</span>
+                  <span className="skill-chip">DeFi Research</span>
+                  <span className="skill-chip">Tokenomics</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="/articles/defi-future" className="px-4 py-2 btn-accent rounded-md">Learn more</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Work with me</button>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                <span className="text-3xl">💹</span>
+            {/* Finance */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#34d399,#10b981)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 18h18" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M6 14v-6" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M10 14v-10" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M14 14v-4" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Finance</div>
+                  <div className="expert-sub">Markets, strategy & portfolios</div>
+                </div>
               </div>
-              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                Finance
-              </h4>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                Expert coverage of financial markets, investment strategies, personal finance, and economic trends.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Market Analysis
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Investment Strategies
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Economic Trends
-                </li>
-              </ul>
+              <div className="expert-details">
+                <p>Coverage of market trends, portfolio construction, and investment strategies designed for clarity and practical decision-making.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">Market Analysis</span>
+                  <span className="skill-chip">Investment Strategy</span>
+                  <span className="skill-chip">Risk Management</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="/articles/investment-strategies-2025" className="px-4 py-2 btn-accent rounded-md">Learn more</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Hire me</button>
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                <span className="text-3xl">📊</span>
+            {/* Business */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#60a5fa,#7c3aed)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6h16v12H4z" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 10h8" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Business</div>
+                  <div className="expert-sub">Startups, strategy & research</div>
+                </div>
               </div>
-              <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                Business
-              </h4>
-              <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-                Compelling stories about entrepreneurship, corporate strategy, innovation, and market dynamics.
-              </p>
-              <ul className="space-y-2 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Startup Ecosystems
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Corporate Strategy
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✓</span> Market Research
-                </li>
-              </ul>
+              <div className="expert-details">
+                <p>Stories and analysis that help founders and leaders understand market dynamics, scale effectively, and communicate strategy.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">Startup Growth</span>
+                  <span className="skill-chip">Corporate Strategy</span>
+                  <span className="skill-chip">Market Research</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="/articles/building-startup-digital-age" className="px-4 py-2 btn-accent rounded-md">Learn more</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Discuss project</button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -327,13 +362,13 @@ export default function Home() {
             </p>
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300">
               <div className="space-y-4">
-                <a 
-                  href="mailto:pitso@example.com" 
-                  className="flex items-center justify-center gap-3 px-6 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-lg"
-                >
-                  <span className="text-2xl">📧</span>
-                  <span>admin@pitsomanyike.co.za</span>
-                </a>
+                  <a 
+                    href="mailto:pitso@example.com" 
+                    className="flex items-center justify-center gap-3 px-6 py-4 btn-accent rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-lg"
+                  >
+                    <span className="text-2xl">📧</span>
+                    <span>admin@pitsomanyike.co.za</span>
+                  </a>
                 
                 <div className="flex gap-4 justify-center pt-4">
                   <a 
@@ -371,6 +406,28 @@ export default function Home() {
           <p className="text-slate-600 dark:text-slate-400"> 2025 Pitso Manyike. All rights reserved.</p>
         </div>
       </footer>
+      {/* Modal markup */}
+      {showModal && (
+        <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Contact popup">
+          <div className="modal">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h4 className="text-2xl font-bold mb-1">Hi — I&apos;m Pitso 👋</h4>
+                <p className="text-sm text-slate-600 dark:text-slate-300 mb-4">I turn complex crypto and finance topics into clear stories. How can I help?</p>
+              </div>
+              <div>
+                <button className="modal-close" onClick={() => setShowModal(false)} aria-label="Close popup">✕</button>
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-4">
+              <a href="mailto:pitso@example.com?subject=Work%20Inquiry" className="inline-block px-5 py-3 btn-accent rounded-lg font-semibold">Email me</a>
+              <a href="#contact" onClick={() => setShowModal(false)} className="inline-block px-5 py-3 border rounded-lg">See contact section</a>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">Or drop a short brief — I usually reply within 48 hours.</p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
