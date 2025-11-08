@@ -60,6 +60,14 @@ p, li, a, span, strong, em {
 a { color: var(--accent); }
 a:hover { color: var(--accent-2); }
 
+/* Force the navigation to use the sans font (Geist) for consistency */
+nav[role="navigation"], nav[role="navigation"] a, nav[role="navigation"] h1 {
+  font-family: var(--font-geist-sans), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans";
+}
+
+/* Ensure navigation title doesn't inherit Playfair styling */
+nav[role="navigation"] h1 { font-family: var(--font-geist-sans) !important; }
+
 /* Skip link for keyboard users */
 .skip-link {
   position: absolute;

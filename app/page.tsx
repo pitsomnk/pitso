@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -243,7 +244,8 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <Link href="/articles/defi-future" className="block">
               <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
-                <div className="h-48 bg-linear-to-br from-blue-500 to-cyan-500 relative overflow-hidden">
+                <div className="h-48 relative overflow-hidden rounded-t-2xl">
+                  <Image src={encodeURI('/Blockchain for Financial Inclusion for Africa(focus on networks)_ Beyond the Bank (1).jpg')} alt="DeFi scene" fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                   <div className="absolute bottom-4 left-4 text-white">
                     <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -270,7 +272,8 @@ export default function Home() {
 
             <Link href="/articles/investment-strategies-2025" className="block">
               <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
-                <div className="h-48 bg-linear-to-br from-green-500 to-emerald-500 relative overflow-hidden">
+                <div className="h-48 relative overflow-hidden rounded-t-2xl">
+                  <Image src={encodeURI('/investment strategies.jpg')} alt="Investment strategies" fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                   <div className="absolute bottom-4 left-4 text-white">
                     <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
@@ -297,7 +300,8 @@ export default function Home() {
 
             <Link href="/articles/building-startup-digital-age" className="block">
               <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
-                <div className="h-48 bg-linear-to-br from-purple-500 to-pink-500 relative overflow-hidden">
+                <div className="h-48 relative overflow-hidden rounded-t-2xl">
+                  <Image src={encodeURI('/startups.jpg')} alt="Startups" fill className="object-cover" />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                   <div className="absolute bottom-4 left-4 text-white">
                     <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
