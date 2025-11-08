@@ -1,0 +1,43 @@
+---
+deployment:
+  tasks:
+    # IMPORTANT: Replace 'yourusername' with your actual cPanel username
+    - export DEPLOYPATH=/home/yourusername/public_html/pitso
+    
+    # Install dependencies
+    - echo "Installing dependencies..."
+    - npm ci --production=false
+    
+    # Build the Next.js application
+    - echo "Building Next.js application..."
+    - npm run build
+    
+    # Create deployment directory if it doesn't exist
+    - mkdir -p $DEPLOYPATH
+    
+    # Copy necessary files to deployment path
+    - echo "Deploying to $DEPLOYPATH..."
+    - /bin/cp -R .next $DEPLOYPATH
+    - /bin/cp -R public $DEPLOYPATH
+    - /bin/cp -R app $DEPLOYPATH
+    - /bin/cp package.json $DEPLOYPATH
+    - /bin/cp package-lock.json $DEPLOYPATH
+    - /bin/cp next.config.ts $DEPLOYPATH
+    - /bin/cp server.js $DEPLOYPATH
+    
+    # Copy configuration files
+    - /bin/cp tsconfig.json $DEPLOYPATH
+    - /bin/cp postcss.config.mjs $DEPLOYPATH
+    - /bin/cp eslint.config.mjs $DEPLOYPATH
+    - /bin/cp next-env.d.ts $DEPLOYPATH
+    
+    # Install production dependencies in deployment path
+    - cd $DEPLOYPATH && npm ci --production
+    
+    # Set proper permissions
+    - chmod +x $DEPLOYPATH/server.js
+    
+    - echo "Deployment completed successfully!"
+    - echo "To start the application, run: node server.js"
+    - echo "Make sure Node.js is available on your cPanel hosting"
+
