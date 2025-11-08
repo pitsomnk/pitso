@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,7 +29,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900">
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg shadow-lg' 
@@ -63,7 +64,7 @@ export default function Home() {
         <section id="home" className="min-h-screen flex items-center justify-center pt-20">
           <div className="text-center max-w-4xl animate-fade-in">
             <div className="mb-8 inline-block animate-bounce-slow">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <div className="w-32 h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer">
                 PM
               </div>
             </div>
@@ -128,7 +129,7 @@ export default function Home() {
           </h3>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <div className="w-16 h-16 bg-linear-to-br from-orange-400 to-yellow-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <span className="text-3xl">₿</span>
               </div>
               <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -152,7 +153,7 @@ export default function Home() {
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <div className="w-16 h-16 bg-linear-to-br from-green-400 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <span className="text-3xl">💹</span>
               </div>
               <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
@@ -175,7 +176,7 @@ export default function Home() {
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 cursor-pointer">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <div className="w-16 h-16 bg-linear-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <span className="text-3xl">📊</span>
               </div>
               <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
@@ -205,92 +206,101 @@ export default function Home() {
             Featured Articles
           </h3>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2">
-              <div className="h-48 bg-gradient-to-br from-blue-500 to-cyan-500 relative overflow-hidden">
+            <Link href="/articles/defi-future" className="block">
+              <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
+                <div className="h-48 bg-linear-to-br from-blue-500 to-cyan-500 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                      Cryptocurrency
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    The Future of Decentralized Finance
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
+                    Exploring how DeFi protocols are reshaping traditional finance and creating new opportunities for financial inclusion.
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+                    <span>5 min read</span>
+                    <span className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
+                      Read More →
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+
+            <Link href="/articles/investment-strategies-2025" className="block">
+              <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
+                <div className="h-48 bg-linear-to-br from-green-500 to-emerald-500 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                      Finance
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                    Investment Strategies for 2025
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
+                    A comprehensive guide to navigating market volatility and building a resilient investment portfolio.
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+                    <span>7 min read</span>
+                    <span className="text-green-600 dark:text-green-400 hover:underline font-medium">
+                      Read More →
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+
+            <Link href="/articles/building-startup-digital-age" className="block">
+              <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 h-full">
+                <div className="h-48 bg-linear-to-br from-purple-500 to-pink-500 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                      Business
+                    </span>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                    Building a Startup in the Digital Age
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
+                    Key lessons from successful entrepreneurs on scaling businesses and navigating the modern startup landscape.
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+                    <span>6 min read</span>
+                    <span className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+                      Read More →
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </Link>
+
+            <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2 opacity-60 cursor-not-allowed">
+              <div className="h-48 bg-linear-to-br from-orange-500 to-red-500 relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
                 <div className="absolute bottom-4 left-4 text-white">
                   <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
                     Cryptocurrency
                   </span>
                 </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  The Future of Decentralized Finance
-                </h4>
-                <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
-                  Exploring how DeFi protocols are reshaping traditional finance and creating new opportunities for financial inclusion.
-                </p>
-                <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-                  <span>5 min read</span>
-                  <button className="text-blue-600 dark:text-blue-400 hover:underline font-medium">
-                    Read More →
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2">
-              <div className="h-48 bg-gradient-to-br from-green-500 to-emerald-500 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                    Finance
-                  </span>
+                <div className="absolute top-4 right-4 bg-white dark:bg-slate-900 text-slate-900 dark:text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  Coming Soon
                 </div>
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                  Investment Strategies for 2025
-                </h4>
-                <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
-                  A comprehensive guide to navigating market volatility and building a resilient investment portfolio.
-                </p>
-                <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-                  <span>7 min read</span>
-                  <button className="text-green-600 dark:text-green-400 hover:underline font-medium">
-                    Read More →
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2">
-              <div className="h-48 bg-gradient-to-br from-purple-500 to-pink-500 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                    Business
-                  </span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                  Building a Startup in the Digital Age
-                </h4>
-                <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
-                  Key lessons from successful entrepreneurs on scaling businesses and navigating the modern startup landscape.
-                </p>
-                <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
-                  <span>6 min read</span>
-                  <button className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
-                    Read More →
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <article className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group transform hover:-translate-y-2">
-              <div className="h-48 bg-gradient-to-br from-orange-500 to-red-500 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="absolute bottom-4 left-4 text-white">
-                  <span className="text-xs font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                    Cryptocurrency
-                  </span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
                   NFTs Beyond Art: Real-World Applications
                 </h4>
                 <p className="text-slate-600 dark:text-slate-300 mb-4 line-clamp-3">
@@ -298,9 +308,9 @@ export default function Home() {
                 </p>
                 <div className="flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
                   <span>8 min read</span>
-                  <button className="text-orange-600 dark:text-orange-400 hover:underline font-medium">
-                    Read More →
-                  </button>
+                  <span className="text-orange-600 dark:text-orange-400 font-medium">
+                    Coming Soon
+                  </span>
                 </div>
               </div>
             </article>
