@@ -71,13 +71,22 @@ export default function Home() {
         <section id="home" className="min-h-screen flex items-center justify-center pt-20">
           <div className="text-center max-w-4xl animate-fade-in">
             <div className="mb-8 inline-block animate-bounce-slow">
-              <div
-                role="img"
-                aria-label="Logo: Pitso Manyike"
-                title="Pitso Manyike"
-                className="w-32 h-32 bg-linear-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-5xl font-bold shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer"
-              >
-                PM
+              <div className="relative w-64 h-64 mx-auto">
+                {/* Decorative ring */}
+                <div className="absolute inset-0 bg-linear-to-br from-blue-500 to-purple-600 rounded-full animate-pulse"></div>
+                {/* Profile picture */}
+                <div className="absolute inset-2 rounded-full overflow-hidden border-8 border-white dark:border-slate-900 shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer">
+                  <Image 
+                    src="/pitsomanyike.jpg" 
+                    alt="Pitso Manyike - Freelance Writer"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {/* Decorative dots */}
+                <div className="absolute -top-4 -right-4 w-12 h-12 bg-blue-500 rounded-full border-8 border-white dark:border-slate-900"></div>
+                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-purple-500 rounded-full border-8 border-white dark:border-slate-900"></div>
               </div>
             </div>
             <h2 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-white mb-6 animate-slide-up">
