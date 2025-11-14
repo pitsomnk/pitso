@@ -15,7 +15,7 @@ export default function Home() {
       setScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['home', 'about', 'expertise', 'articles', 'contact'];
+      const sections = ['home', 'about', 'expertise', 'articles', 'projects', 'contact'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -46,7 +46,7 @@ export default function Home() {
             <span className="hidden md:inline text-sm text-slate-600 dark:text-slate-400">— Writer • Crypto, Finance & Business</span>
           </h1>
           <div className="flex gap-6">
-            {['about', 'expertise', 'articles', 'contact'].map((item) => (
+            {['about', 'expertise', 'articles', 'projects', 'contact'].map((item) => (
               <a 
                 key={item}
                 href={`#${item}`} 
