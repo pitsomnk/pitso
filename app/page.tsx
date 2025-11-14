@@ -101,41 +101,72 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="py-24">
-            <div className="max-w-4xl mx-auto">
+        <section id="about" className="py-20 relative overflow-hidden">
+          {/* Compact playful decorations */}
+          <div className="absolute inset-0 pointer-events-none opacity-5 dark:opacity-3">
+            <svg className="absolute top-10 right-10 animate-pulse" width="60" height="60" viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="25" fill="url(#circle-gradient)" />
+              <defs>
+                <linearGradient id="circle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#06b6d4" />
+                  <stop offset="100%" stopColor="#7c3aed" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div className="max-w-4xl mx-auto relative z-10">
             <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">
               About Me
             </h3>
-            {/* About card styled similarly to expertise cards */}
-            <div className="expert-card card-entrance p-8 md:p-12">
-              <div className="expert-head">
-                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#06b6d4,#7c3aed)' }} aria-hidden>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.95)" strokeWidth="1.2"/>
-                    <path d="M8 15s1-2 4-2 4 2 4 2" stroke="rgba(255,255,255,0.95)" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M9 9h.01M15 9h.01" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
-                  </svg>
+
+            {/* Compact about card */}
+            <div className="expert-card card-entrance p-6 md:p-8 hover:shadow-2xl transition-all duration-500">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                {/* Left: Icon and quick stats */}
+                <div className="shrink-0">
+                  <div className="w-20 h-20 bg-linear-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg hover:scale-110 transition-transform cursor-pointer">
+                    PM
+                  </div>
+                  <div className="mt-4 space-y-2 text-center">
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">100+</div>
+                    <div className="text-xs text-slate-600 dark:text-slate-400">Articles</div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-2xl font-bold" style={{ fontFamily: 'var(--font-playfair), serif' }}>Pitso Manyike</div>
-                  <div className="expert-sub">Freelance Writer — Crypto, Finance & Business</div>
+
+                {/* Right: Content */}
+                <div className="flex-1">
+                  <div className="mb-4">
+                    <h4 className="text-2xl font-bold text-slate-900 dark:text-white">Pitso Manyike</h4>
+                    <p className="text-slate-600 dark:text-slate-400">Freelance Writer — Crypto, Finance & Business</p>
+                  </div>
+
+                  <div className="text-slate-600 dark:text-slate-300 leading-relaxed space-y-3">
+                    <p className="flex items-start gap-2">
+                      <span className="text-xl shrink-0">✍️</span>
+                      <span>I turn complex crypto, finance, and business topics into clear, engaging stories that help founders and investors act with confidence.</span>
+                    </p>
+                    <p className="flex items-start gap-2">
+                      <span className="text-xl shrink-0">💼</span>
+                      <span>Real-world experience running a small business + deep dive research = content that actually works.</span>
+                    </p>
+                  </div>
+
+                  <div className="skill-chips mt-4">
+                    {['Content Writing','SEO','Research','Technical Writing'].map(s => (
+                      <span key={s} className="skill-chip hover:scale-110 transition-transform text-sm">{s}</span>
+                    ))}
+                  </div>
+
+                  <div className="mt-5 flex gap-3 flex-wrap">
+                    <button onClick={() => setShowModal(true)} className="px-5 py-2.5 btn-accent rounded-lg font-semibold text-sm hover:shadow-xl hover:scale-105 transition-all duration-300">
+                      ✨ Work with me
+                    </button>
+                    <a href="#articles" className="px-5 py-2.5 border border-slate-300 dark:border-slate-700 rounded-lg hover:border-purple-500 hover:scale-105 transition-all duration-300 text-sm">
+                      📚 Read My Work
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              <div className="mt-6 text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                <p>I write clear, practical, and engaging content about cryptocurrency, finance, and business. I focus on turning complex ideas into readable stories that deliver value to founders, investors, and curious readers.</p>
-                <p className="mt-4">With hands-on experience running a small business, I blend theory with practice to create content that helps people act — whether that&apos;s understanding DeFi risks, building investor-ready narratives, or explaining market trends.</p>
-              </div>
-
-              <div className="skill-chips mt-6">
-                {['Content Writing','SEO','Research','Copywriting','Technical Writing','Editing'].map(s => (
-                  <span key={s} className="skill-chip">{s}</span>
-                ))}
-              </div>
-
-              <div className="mt-6 flex gap-4">
-                <button onClick={() => setShowModal(true)} className="px-5 py-3 btn-accent rounded-lg font-semibold">Work with me</button>
-                <a href="#contact" className="px-5 py-3 border rounded-lg">Contact</a>
               </div>
             </div>
           </div>
@@ -230,6 +261,92 @@ export default function Home() {
                 <div className="mt-4 flex gap-3">
                   <a href="/articles/building-startup-digital-age" className="px-4 py-2 btn-accent rounded-md">Learn more</a>
                   <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Discuss project</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Web Development */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#ec4899,#a855f7)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Web Development</div>
+                  <div className="expert-sub">Crafting engaging experiences</div>
+                </div>
+              </div>
+              <div className="expert-details">
+                <p>Building modern, responsive websites and web applications that combine beautiful design with smooth functionality to create memorable user experiences.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">React & Next.js</span>
+                  <span className="skill-chip">UI/UX Design</span>
+                  <span className="skill-chip">Responsive Web</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="#contact" className="px-4 py-2 btn-accent rounded-md">Start project</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Let&apos;s build</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Data Analysis */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#06b6d4,#0891b2)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 3v18h18" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M18 9l-5 5-3-3-4 4" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="18" cy="9" r="1.5" fill="rgba(255,255,255,0.95)"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Data Analysis</div>
+                  <div className="expert-sub">Insights from complex data</div>
+                </div>
+              </div>
+              <div className="expert-details">
+                <p>Transforming raw data into actionable insights through statistical analysis, visualization, and clear reporting that drives informed decision-making.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">Data Visualization</span>
+                  <span className="skill-chip">Statistical Analysis</span>
+                  <span className="skill-chip">Python & SQL</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="#contact" className="px-4 py-2 btn-accent rounded-md">Explore data</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Analyze with me</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Storytelling */}
+            <div className="expert-card card-entrance" tabIndex={0}>
+              <div className="expert-head">
+                <div className="expert-icon" style={{ background: 'linear-gradient(90deg,#f59e0b,#d97706)' }} aria-hidden>
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 6.5c3.5 0 6.5 1.5 6.5 4.5s-3 4.5-6.5 4.5S5.5 14 5.5 11 8.5 6.5 12 6.5z" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 15.5v5" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M8 20.5h8" stroke="rgba(255,255,255,0.95)" strokeWidth="1.5" strokeLinecap="round"/>
+                    <circle cx="12" cy="4" r="1.5" fill="rgba(255,255,255,0.95)"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="expert-title">Storytelling</div>
+                  <div className="expert-sub">Narratives that resonate</div>
+                </div>
+              </div>
+              <div className="expert-details">
+                <p>Crafting compelling narratives that connect with audiences emotionally and intellectually. Turning facts and data into stories that inspire action and create lasting impact.</p>
+                <div className="skill-chips">
+                  <span className="skill-chip">Brand Narratives</span>
+                  <span className="skill-chip">Content Strategy</span>
+                  <span className="skill-chip">Audience Engagement</span>
+                </div>
+                <div className="mt-4 flex gap-3">
+                  <a href="#articles" className="px-4 py-2 btn-accent rounded-md">See stories</a>
+                  <button onClick={() => setShowModal(true)} className="px-4 py-2 border rounded-md">Tell my story</button>
                 </div>
               </div>
             </div>
@@ -353,6 +470,146 @@ export default function Home() {
                 </div>
               </div>
             </article>
+          </div>
+        </section>
+
+        {/* Web Development Showcase Section */}
+        <section id="projects" className="py-24 bg-slate-100/50 dark:bg-slate-900/50">
+          <div className="max-w-6xl mx-auto">
+            <h3 className="text-4xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+              Web Development Showcase
+            </h3>
+            <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
+              Creating digital experiences that combine beautiful design with powerful functionality
+            </p>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Project 1 - Portfolio Website */}
+              <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="relative h-48 bg-linear-to-br from-blue-500 to-purple-600 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-white text-center">
+                      <div className="text-6xl mb-2">🌐</div>
+                      <div className="text-sm font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                        Live Site
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    Portfolio Website
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">
+                    Modern portfolio with smooth animations, dark mode support, and responsive design. Built with Next.js and Tailwind CSS.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-xs px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">Next.js</span>
+                    <span className="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-full">React</span>
+                    <span className="text-xs px-2 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 rounded-full">Tailwind</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <a href="#" className="text-sm px-4 py-2 btn-accent rounded-lg hover:scale-105 transition-transform">
+                      View Live
+                    </a>
+                    <a href="#" className="text-sm px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg hover:border-blue-500 hover:scale-105 transition-all">
+                      View Code
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Project 2 - E-Commerce Platform */}
+              <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="relative h-48 bg-linear-to-br from-green-500 to-emerald-600 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-white text-center">
+                      <div className="text-6xl mb-2">🛒</div>
+                      <div className="text-sm font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                        E-Commerce
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                    E-Commerce Platform
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">
+                    Full-featured online store with cart management, checkout flow, and payment integration using Stripe.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-xs px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full">React</span>
+                    <span className="text-xs px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-full">Node.js</span>
+                    <span className="text-xs px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full">MongoDB</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <a href="#" className="text-sm px-4 py-2 btn-accent rounded-lg hover:scale-105 transition-transform">
+                      View Demo
+                    </a>
+                    <a href="#" className="text-sm px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg hover:border-green-500 hover:scale-105 transition-all">
+                      Case Study
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Project 3 - Dashboard Analytics */}
+              <div className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="relative h-48 bg-linear-to-br from-orange-500 to-red-500 overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-white text-center">
+                      <div className="text-6xl mb-2">📊</div>
+                      <div className="text-sm font-semibold bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
+                        Analytics
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                    Analytics Dashboard
+                  </h4>
+                  <p className="text-slate-600 dark:text-slate-300 mb-4 text-sm">
+                    Interactive data visualization dashboard with real-time updates, charts, and comprehensive reporting tools.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-xs px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-full">TypeScript</span>
+                    <span className="text-xs px-2 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-full">Chart.js</span>
+                    <span className="text-xs px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full">PostgreSQL</span>
+                  </div>
+                  <div className="flex gap-3">
+                    <a href="#" className="text-sm px-4 py-2 btn-accent rounded-lg hover:scale-105 transition-transform">
+                      Explore
+                    </a>
+                    <a href="#" className="text-sm px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-lg hover:border-orange-500 hover:scale-105 transition-all">
+                      Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* CTA for custom projects */}
+            <div className="mt-12 text-center">
+              <div className="bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white">
+                <h4 className="text-2xl font-bold mb-3">Have a Project in Mind?</h4>
+                <p className="mb-6 max-w-2xl mx-auto">
+                  Let&apos;s build something amazing together. From concept to deployment, I&apos;ll bring your vision to life.
+                </p>
+                <div className="flex gap-4 justify-center flex-wrap">
+                  <button onClick={() => setShowModal(true)} className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:scale-105 hover:shadow-xl transition-all">
+                    💬 Start a Conversation
+                  </button>
+                  <a href="#contact" className="px-6 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 hover:scale-105 transition-all">
+                    📧 Get in Touch
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
